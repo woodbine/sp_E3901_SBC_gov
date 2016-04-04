@@ -86,7 +86,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "E3901_SBC_gov"
-url = "http://www.swindon.gov.uk/cd/cd-opendata/Pages/cd-foi-transparency-expenditure.aspx"
+url = "http://www.swindon.gov.uk/info/20028/open_data_and_transparency/399/payments_to_suppliers_over_500"
 errors = 0
 data = []
 
@@ -102,7 +102,7 @@ block = soup.find('div', attrs = {'class': 'editor'})
 links_block = block.find_all('ul')[-1]
 links = links_block.find_all('a')
 for link in links:
-    url = link['href']
+    url = 'http://www.swindon.gov.uk'+link['href']
     csvfile = link.text.strip().replace(u'\xa0', ' ').split('-')[-1].strip()
     csvMth = csvfile[:3]
     csvYr = csvfile[-4:]
