@@ -99,10 +99,13 @@ soup = BeautifulSoup(html, 'lxml')
 #### SCRAPE DATA
 
 block = soup.find('div', attrs = {'class': 'editor'})
-links_block = block.find_all('ul')[-1]
+links_block = block.find('ul')
 links = links_block.find_all('a')
 for link in links:
-    url = 'http://www.swindon.gov.uk'+link['href']
+    if 'http' not in link['href']:
+        url = 'http://www.swindon.gov.uk'+link['href']
+    else:
+        url = link['href']
     csvfile = link.text.strip().replace(u'\xa0', ' ').split('-')[-1].strip()
     csvMth = csvfile[:3]
     csvYr = csvfile[-4:]
